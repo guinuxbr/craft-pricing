@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Craft Pricing</title>
+  <link rel="shortcut icon" type="image/png" href="favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald" type="text/css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+  <section class="hero is-primary is-medium">
+    <!-- Hero head: will stick at the top -->
+    <div class="hero-head" id="ovrd-hero">
+      <nav class="navbar">
+        <div class="container is-flex is-justify-content-flex-end" style="padding: 0.5rem;">
+          <div class="navbar-item">
+            <select id="langSelector" style="padding:6px;border-radius:6px;">
+              <option value="en" selected>🇬🇧 EN</option>
+              <option value="pt">🇧🇷 PT</option>
+            </select>
+          </div>
+          <div class="navbar-item">
+            <button id="themeToggle" title="Toggle theme" aria-label="Toggle theme">🌙</button>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Hero content: will be in the middle -->
+    <div class="hero-body" id="ovrd-hero">
+      <div class="container has-text-centered">
+        <h1 class="title" data-i18n="title"></h1>
+        <h2 class="subtitle" data-i18n="subtitle"></h2>
+        <figure class="image is-64x64 ovrd-logo" id="ovrd-logo">
+          <img src="images/logo.png" alt="logo">
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Begin main form -->
+  <div class="container">
+    <div class="columns">
+      <div class="column is-half has-text-centered">
+        <div class="box" id="ovrd-box">
+          <div class="field">
+            <div class="control">
+              <p class="has-text-centered" data-i18n="describe_example"></p>
+              <input class="input is-small is-rounded" id="description" type="text" required name="description"
+                data-i18n-placeholder="description_placeholder">
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="control">
+              <p class="has-text-centered" data-i18n="skein_weight"></p>
+              <input class="input is-small is-rounded" type="number" required name="skeinWeight" id="skein-weight"
+                min="1">
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <p class="has-text-centered" data-i18n="skein_price"></p>
+              <input class="input is-small is-rounded" type="number" required name="skeinPrice" id="skein-price"
+                min="1">
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <p class="has-text-centered" data-i18n="finished_weight"></p>
+              <input class="input is-small is-rounded" type="number" required name="finishedWeight" id="finished-weight"
+                min="1">
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <p class="has-text-centered" data-i18n="hour_value"></p>
+              <input class="input is-small is-rounded" type="number" required name="hourRate" id="hour-rate" min="1">
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <p class="has-text-centered">
+                <span data-i18n="total_hours"></span>
+                <input class="input is-small is-rounded" type="number" required name="hoursWorked" id="hours-worked"
+                  min="1">
+              </p>
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <p class="has-text-centered">
+                <span data-i18n="profit_margin"></span>
+                <input class="input is-small is-rounded" type="number" required name="profitMargin" id="profit-margin"
+                  min="1">
+              </p>
+            </div>
+          </div>
+          <div id="result">
+          </div>
+          <button class="button is-success" value="calculate" id="ovrd-calculate" onclick="calculate()"
+            data-i18n="btn_calculate">
+          </button>
+          <button class="button is-danger" value="clean" id="ovrd-clean" onclick="clean()" data-i18n="btn_clean">
+          </button>
+        </div>
+      </div>
+      <!-- End main form -->
+
+      <div class="column">
+        <div class="box has-text-justified" id="ovrd-box">
+          <span data-i18n="explain_calculate"></span>
+          <br>
+          <span data-i18n="explain_copy_pdf"></span>
+          <section class="section">
+            <div class="columns is-centered">
+              <div class="column is-narrow">
+                <div id="table-result">
+                  <!-- Here goes the result table -->
+                </div>
+              </div>
+            </div>
+          </section>
+          <div class="has-text-centered">
+            <button class="button is-info is-hidden" data-clipboard-target="#result-table-copy" id="ovrd-copy"
+              value="copiar" data-i18n="btn_copy"></button>
+            <button class="button is-success is-hidden" id="ovrd-save-pdf" value="save-pdf" onclick="save_pdf()"
+              data-i18n="btn_save_pdf">
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <footer class="footer" id="ovrd-footer">
+    <div class="content has-text-centered">
+      <p>
+        <a href="https://github.com/guinuxbr/" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://twitter.com/guinuxbr" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.linkedin.com/in/gllmarques/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://www.instagram.com/guinuxbr" target="_blank"><i class="fab fa-instagram"></i></a><br>
+        <a href="https://guinuxbr.com" target="_blank">GuinuxBR</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/clean.js"></script>
+  <script src="js/validate.js"></script>
+  <script src="js/calculate.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/3.0.3/jspdf.umd.min.js"
+    integrity="sha512-+EeCylkt9WHJk5tGJxYdecHOcXFRME7qnbsfeMsdQL6NUPYm2+uGFmyleEqsmVoap/f3dN/sc3BX9t9kHXkHHg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="js/save_pdf.js"></script>
+  <script src="js/clipboard.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script>
+    var btn = document.getElementById('ovrd-copy');
+    var clipboard = new ClipboardJS(btn);
+  </script>
+</body>
+
+</html>
