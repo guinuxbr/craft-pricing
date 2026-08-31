@@ -1,172 +1,345 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="system">
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Craft Pricing</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Craft Pricing - Handmade & Craft Price Calculator</title>
+  <meta name="description" content="A fast, responsive, and easy-to-use pricing calculator for handmade craft projects, knitting, crochet, and artisan work. Export to PDF or spreadsheet with one click.">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://craftpricing.guinuxbr.com/">
+  <meta property="og:title" content="Craft Pricing - Handmade & Craft Price Calculator">
+  <meta property="og:description" content="A fast, responsive, and easy-to-use pricing calculator for handmade craft projects. Export to PDF or spreadsheet with one click.">
+  <meta property="og:image" content="images/screenshot.png">
+
+  <!-- X (Twitter) Cards -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://craftpricing.guinuxbr.com/">
+  <meta property="twitter:title" content="Craft Pricing - Handmade & Craft Price Calculator">
+  <meta property="twitter:description" content="A fast, responsive, and easy-to-use pricing calculator for handmade craft projects. Export to PDF or spreadsheet with one click.">
+  <meta property="twitter:image" content="images/screenshot.png">
+
+  <!-- Favicon & PWA -->
   <link rel="shortcut icon" type="image/png" href="favicon.ico">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald" type="text/css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
   <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#173f4f">
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-  <section class="hero is-primary is-medium">
-    <!-- Hero head: will stick at the top -->
-    <div class="hero-head" id="ovrd-hero">
-      <nav class="navbar">
-        <div class="container is-flex is-justify-content-flex-end" style="padding: 0.5rem;">
-          <div class="navbar-item">
-            <select id="langSelector" style="padding:6px;border-radius:6px;">
+  <div class="wrapper">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-container">
+        <a href="./" class="brand" aria-label="Craft Pricing Home">
+          <img class="img-header" src="images/logo.png" alt="Craft Pricing logo" width="42" height="42">
+          <span class="brand-title" data-i18n="title">Craft Pricing</span>
+        </a>
+
+        <nav class="header-nav" aria-label="Header Tools">
+          <!-- Language Selector -->
+          <div class="lang-select-box">
+            <select id="langSelector" class="lang-select" aria-label="Select Language">
               <option value="en" selected>🇬🇧 EN</option>
               <option value="pt">🇧🇷 PT</option>
             </select>
-          </div>
-          <div class="navbar-item">
-            <button id="themeToggle" title="Toggle theme" aria-label="Toggle theme">🌙</button>
-          </div>
-        </div>
-      </nav>
-    </div>
-
-    <!-- Hero content: will be in the middle -->
-    <div class="hero-body" id="ovrd-hero">
-      <div class="container has-text-centered">
-        <h1 class="title" data-i18n="title"></h1>
-        <h2 class="subtitle" data-i18n="subtitle"></h2>
-        <figure class="image is-64x64 ovrd-logo" id="ovrd-logo">
-          <img src="images/logo.png" alt="logo">
-        </figure>
-      </div>
-    </div>
-  </section>
-
-  <!-- Begin main form -->
-  <div class="container">
-    <div class="columns">
-      <div class="column is-half has-text-centered">
-        <div class="box" id="ovrd-box">
-          <div class="field">
-            <div class="control">
-              <p class="has-text-centered" data-i18n="describe_example"></p>
-              <input class="input is-small is-rounded" id="description" type="text" required name="description"
-                data-i18n-placeholder="description_placeholder">
-            </div>
+            <i class="fa-solid fa-chevron-down lang-icon"></i>
           </div>
 
-          <div class="field">
-            <div class="control">
-              <p class="has-text-centered" data-i18n="skein_weight"></p>
-              <input class="input is-small is-rounded" type="number" required name="skeinWeight" id="skein-weight"
-                min="1">
-            </div>
-          </div>
-          <div class="field">
-            <div class="control">
-              <p class="has-text-centered" data-i18n="skein_price"></p>
-              <input class="input is-small is-rounded" type="number" required name="skeinPrice" id="skein-price"
-                min="1">
-            </div>
-          </div>
-          <div class="field">
-            <div class="control">
-              <p class="has-text-centered" data-i18n="finished_weight"></p>
-              <input class="input is-small is-rounded" type="number" required name="finishedWeight" id="finished-weight"
-                min="1">
-            </div>
-          </div>
-          <div class="field">
-            <div class="control">
-              <p class="has-text-centered" data-i18n="hour_value"></p>
-              <input class="input is-small is-rounded" type="number" required name="hourRate" id="hour-rate" min="1">
-            </div>
-          </div>
-          <div class="field">
-            <div class="control">
-              <p class="has-text-centered">
-                <span data-i18n="total_hours"></span>
-                <input class="input is-small is-rounded" type="number" required name="hoursWorked" id="hours-worked"
-                  min="1">
-              </p>
-            </div>
-          </div>
-          <div class="field">
-            <div class="control">
-              <p class="has-text-centered">
-                <span data-i18n="profit_margin"></span>
-                <input class="input is-small is-rounded" type="number" required name="profitMargin" id="profit-margin"
-                  min="1">
-              </p>
-            </div>
-          </div>
-          <div id="result">
-          </div>
-          <button class="button is-success" value="calculate" id="ovrd-calculate" onclick="calculate()"
-            data-i18n="btn_calculate">
+          <!-- Theme Toggle Button -->
+          <button id="btn-theme-toggle" class="btn-header-icon" title="Toggle Dark/Light Theme (T)" aria-label="Toggle theme">
+            <i class="fa-solid fa-moon" id="icon-theme"></i>
           </button>
-          <button class="button is-danger" value="clean" id="ovrd-clean" onclick="clean()" data-i18n="btn_clean">
-          </button>
-        </div>
-      </div>
-      <!-- End main form -->
 
-      <div class="column">
-        <div class="box has-text-justified" id="ovrd-box">
-          <span data-i18n="explain_calculate"></span>
-          <br>
-          <span data-i18n="explain_copy_pdf"></span>
-          <section class="section">
-            <div class="columns is-centered">
-              <div class="column is-narrow">
-                <div id="table-result">
-                  <!-- Here goes the result table -->
+          <!-- Keyboard Shortcuts Button -->
+          <button id="btn-shortcuts-toggle" class="btn-header-icon" title="Keyboard Shortcuts (?)" aria-label="Keyboard Shortcuts">
+            <i class="fa-solid fa-keyboard"></i>
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="container">
+        <!-- Hero Section -->
+        <section class="hero-banner" aria-label="Introduction">
+          <div class="hero-badge">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <span data-i18n="subtitle">Craft Price Calculator</span>
+          </div>
+          <h1 class="hero-title">
+            <span data-i18n="hero_heading">Fair & Accurate</span> <span data-i18n="hero_heading_suffix">Pricing For Your Craft</span>
+          </h1>
+          <p class="hero-subtitle" data-i18n="hero_description">
+            Calculate material costs, labor value, and healthy profit margins for all your handmade creations in seconds.
+          </p>
+        </section>
+
+        <!-- Pricing Grid Deck -->
+        <div class="pricing-grid">
+          <!-- Left Column: Pricing Input Form -->
+          <section class="card-deck" aria-label="Craft Calculator Form">
+            <div class="deck-header">
+              <div>
+                <h2 class="deck-title"><i class="fa-solid fa-calculator"></i> <span data-i18n="form_title">Project Details</span></h2>
+                <p class="deck-subtitle" data-i18n="form_subtitle">Enter material measurements, time, and margin</p>
+              </div>
+            </div>
+
+            <form id="form-calculator" class="calculator-form" onsubmit="return false;">
+              <!-- Project Description -->
+              <div class="form-group">
+                <label for="description" class="form-label">
+                  <i class="fa-solid fa-tag"></i> <span data-i18n="describe_example">Project Name / Description:</span>
+                </label>
+                <div class="input-container">
+                  <i class="fa-solid fa-pen-nib input-icon"></i>
+                  <input type="text" id="description" class="input-field" required data-i18n-placeholder="description_placeholder" placeholder="e.g. Handmade Wool Sweater" autocomplete="off">
                 </div>
+              </div>
+
+              <!-- Skein Weight & Skein Price -->
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="skein-weight" class="form-label">
+                    <i class="fa-solid fa-weight-hanging"></i> <span data-i18n="skein_weight">Skein weight (g):</span>
+                  </label>
+                  <div class="input-container">
+                    <i class="fa-solid fa-scale-balanced input-icon"></i>
+                    <input type="number" id="skein-weight" class="input-field" required min="1" step="any" placeholder="100">
+                    <span class="input-unit">g</span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="skein-price" class="form-label">
+                    <i class="fa-solid fa-dollar-sign"></i> <span data-i18n="skein_price">Skein price:</span>
+                  </label>
+                  <div class="input-container">
+                    <i class="fa-solid fa-money-bill-wave input-icon"></i>
+                    <input type="number" id="skein-price" class="input-field" required min="0.01" step="any" placeholder="15.00">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Finished Weight & Hourly Rate -->
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="finished-weight" class="form-label">
+                    <i class="fa-solid fa-cube"></i> <span data-i18n="finished_weight">Finished weight (g):</span>
+                  </label>
+                  <div class="input-container">
+                    <i class="fa-solid fa-basket-shopping input-icon"></i>
+                    <input type="number" id="finished-weight" class="input-field" required min="1" step="any" placeholder="350">
+                    <span class="input-unit">g</span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="hour-rate" class="form-label">
+                    <i class="fa-solid fa-user-clock"></i> <span data-i18n="hour_value">Hourly rate:</span>
+                  </label>
+                  <div class="input-container">
+                    <i class="fa-solid fa-coins input-icon"></i>
+                    <input type="number" id="hour-rate" class="input-field" required min="0.01" step="any" placeholder="20.00">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Hours Worked & Profit Margin -->
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="hours-worked" class="form-label">
+                    <i class="fa-solid fa-clock"></i> <span data-i18n="total_hours">Total hours worked:</span>
+                  </label>
+                  <div class="input-container">
+                    <i class="fa-regular fa-clock input-icon"></i>
+                    <input type="number" id="hours-worked" class="input-field" required min="0.1" step="any" placeholder="6">
+                    <span class="input-unit">hrs</span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="profit-margin" class="form-label">
+                    <i class="fa-solid fa-percent"></i> <span data-i18n="profit_margin">Profit margin (%):</span>
+                  </label>
+                  <div class="input-container">
+                    <i class="fa-solid fa-chart-line input-icon"></i>
+                    <input type="number" id="profit-margin" class="input-field" required min="0" step="any" placeholder="30">
+                    <span class="input-unit">%</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Inline Error/Warning Banner -->
+              <div id="result"></div>
+
+              <!-- Form Buttons -->
+              <div class="action-buttons">
+                <button type="button" id="ovrd-calculate" class="btn btn-primary" data-i18n="btn_calculate">
+                  <i class="fa-solid fa-calculator"></i> Calculate
+                </button>
+                <button type="button" id="ovrd-clean" class="btn btn-danger-outline" data-i18n="btn_clean">
+                  <i class="fa-solid fa-rotate-left"></i> Clear
+                </button>
+              </div>
+            </form>
+          </section>
+
+          <!-- Right Column: Results & Breakdown Card -->
+          <section class="card-deck" aria-label="Calculation Results">
+            <div class="deck-header">
+              <div>
+                <h2 class="deck-title"><i class="fa-solid fa-receipt"></i> <span data-i18n="results_title">Price Breakdown</span></h2>
+                <p class="deck-subtitle" data-i18n="results_subtitle">Summary of materials, labor & markup</p>
+              </div>
+            </div>
+
+            <!-- Empty State Display -->
+            <div id="results-empty" class="results-empty-state">
+              <i class="fa-solid fa-hand-holding-dollar results-empty-icon"></i>
+              <h3 class="empty-title" data-i18n="explain_calculate">Ready to calculate!</h3>
+              <p class="empty-desc" data-i18n="explain_desc">Fill out your project measurements on the left and click "Calculate" to view the complete price breakdown.</p>
+            </div>
+
+            <!-- Calculation Output (Initially Hidden) -->
+            <div id="results-active" class="results-container" style="display: none;">
+              <!-- Price Highlight Card -->
+              <div class="price-highlight-card">
+                <span class="highlight-label" data-i18n="result_should_charge">Recommended Selling Price</span>
+                <span class="highlight-value" id="highlight-price">0.00</span>
+                <span class="highlight-item-name" id="highlight-title">Handmade Item</span>
+              </div>
+
+              <!-- Table Breakdown -->
+              <div class="table-result-wrapper">
+                <div id="table-result"></div>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="results-actions">
+                <button type="button" id="ovrd-copy" class="btn btn-accent" data-i18n="btn_copy">
+                  <i class="fa-regular fa-copy"></i> Copy Result
+                </button>
+                <button type="button" id="ovrd-save-pdf" class="btn btn-success" data-i18n="btn_save_pdf">
+                  <i class="fa-solid fa-file-pdf"></i> Save PDF
+                </button>
+              </div>
+
+              <!-- Note / Instructions -->
+              <div class="explanation-note">
+                <i class="fa-solid fa-circle-info"></i> <span data-i18n="explain_copy_pdf">You can copy the result directly to your clipboard or generate a clean PDF invoice/record.</span>
               </div>
             </div>
           </section>
-          <div class="has-text-centered">
-            <button class="button is-info is-hidden" data-clipboard-target="#result-table-copy" id="ovrd-copy"
-              value="copiar" data-i18n="btn_copy"></button>
-            <button class="button is-success is-hidden" id="ovrd-save-pdf" value="save-pdf" onclick="save_pdf()"
-              data-i18n="btn_save_pdf">
-            </button>
-          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Keyboard Shortcuts Modal -->
+    <div id="modal-shortcuts" class="modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="shortcuts-title">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h2 id="shortcuts-title"><i class="fa-solid fa-keyboard"></i> <span data-i18n="shortcuts_title">Keyboard Shortcuts</span></h2>
+          <button class="btn-modal-close" id="btn-close-shortcuts" aria-label="Close modal">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <table class="shortcuts-table">
+            <thead>
+              <tr>
+                <th data-i18n="shortcuts_header">Shortcut</th>
+                <th data-i18n="action_header">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><kbd>Enter</kbd></td>
+                <td data-i18n="shortcut_enter">Calculate price (when inside input)</td>
+              </tr>
+              <tr>
+                <td><kbd>C</kbd></td>
+                <td data-i18n="shortcut_copy">Copy calculated result table to clipboard</td>
+              </tr>
+              <tr>
+                <td><kbd>P</kbd></td>
+                <td data-i18n="shortcut_pdf">Save / Download PDF summary</td>
+              </tr>
+              <tr>
+                <td><kbd>L</kbd></td>
+                <td data-i18n="shortcut_clear">Clear / Reset form inputs</td>
+              </tr>
+              <tr>
+                <td><kbd>T</kbd></td>
+                <td data-i18n="shortcut_theme">Toggle Dark / Light theme mode</td>
+              </tr>
+              <tr>
+                <td><kbd>?</kbd></td>
+                <td data-i18n="shortcut_guide">Open Keyboard Shortcuts guide</td>
+              </tr>
+              <tr>
+                <td><kbd>Esc</kbd></td>
+                <td data-i18n="shortcut_esc">Close modal dialogs</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-primary" id="btn-close-shortcuts-alt" data-i18n="btn_got_it">Got it</button>
         </div>
       </div>
     </div>
-  </div>
-  </div>
 
-  <footer class="footer" id="ovrd-footer">
-    <div class="content has-text-centered">
-      <p>
-        <a href="https://github.com/guinuxbr/" target="_blank"><i class="fab fa-github"></i></a>
-        <a href="https://twitter.com/guinuxbr" target="_blank"><i class="fab fa-twitter"></i></a>
-        <a href="https://www.linkedin.com/in/gllmarques/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-        <a href="https://www.instagram.com/guinuxbr" target="_blank"><i class="fab fa-instagram"></i></a><br>
-        <a href="https://guinuxbr.com" target="_blank">GuinuxBR</a>
+    <!-- Floating Scroll to Top Button -->
+    <button id="btn-scroll-top" class="btn-scroll-top" title="Scroll to top" aria-label="Scroll to top">
+      <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- Floating Toast Container -->
+    <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-links">
+        <a href="https://github.com/guinuxbr/craft-pricing" target="_blank" rel="noopener noreferrer" aria-label="GitHub Repository">
+          <i class="fa-brands fa-github"></i>
+        </a>
+        <a href="https://x.com/guinuxbr" target="_blank" rel="noopener noreferrer" aria-label="X Profile">
+          <i class="fa-brands fa-x-twitter"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/gllmarques/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile">
+          <i class="fa-brands fa-linkedin-in"></i>
+        </a>
+        <a href="https://www.instagram.com/guinuxbr" target="_blank" rel="noopener noreferrer" aria-label="Instagram Profile">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+      </div>
+      <p class="footer-credits">
+        Made with ❤️ for my mum by <a href="https://guinuxbr.com" target="_blank" rel="noopener noreferrer">GuinuxBR</a>
       </p>
-    </div>
-  </footer>
+      <p class="footer-disclaimer">
+        <strong>Craft Pricing:</strong> Free and open-source pricing calculator for artisans, knitters, crocheters, and crafters worldwide.
+      </p>
+    </footer>
+  </div>
 
-  <script src="js/i18n.js"></script>
-  <script src="js/theme.js"></script>
-  <script src="js/clean.js"></script>
-  <script src="js/validate.js"></script>
-  <script src="js/calculate.js"></script>
+  <!-- Scripts -->
   <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
-  <script src="js/save_pdf.js"></script>
-  <script src="js/clipboard.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <script>
-    var btn = document.getElementById('ovrd-copy');
-    var clipboard = new ClipboardJS(btn);
-  </script>
+  <script src="js/script.js"></script>
 </body>
 
 </html>
